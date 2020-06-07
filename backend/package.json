@@ -1,13 +1,16 @@
 {
-  "name": "backend",
+  "name": "tindev-backend",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-  "scipts": {
+  "scripts": {
     "dev": "nodemon src/server.js"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "axios": "^0.19.2",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.18"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
