@@ -1,10 +1,14 @@
 /* eslint-disable prettier/prettier */
 import React, {useEffect, useState} from 'react';
+import io from 'socket.io-client';
+
 import {View, Text, SafeAreaView, Image} from 'react-native';
 
 import logo from '../../assets/logo.png';
 import like from '../../assets/like.png';
 import dislike from '../../assets/dislike.png';
+import itsamatch from '../../assets/itsamatch.png';
+
 import AsyncStorage from '@react-native-community/async-storage';
 import api from '../../serices/api';
 
@@ -14,6 +18,7 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 export default function Main({navigation}) {
   const id = navigation.getParam('user');
   const [users, setUsers] = useState([]);
+  const [matchDev, setMatchDev] = useState(null);
 
   useEffect(() => {
     async function loadUsers() {
@@ -27,6 +32,16 @@ export default function Main({navigation}) {
     }
 
     loadUsers();
+  }, [id]);
+
+  useEffect(() => {
+    const socket = io('http://10.0.2.2:3333', {
+      query: {user: id},
+    });
+
+    socket.on('match', (dev) => {
+      setMatchDev(dev);
+    });
   }, [id]);
 
   async function handleLike() {
@@ -88,6 +103,20 @@ export default function Main({navigation}) {
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={handleLike}>
             <Image source={like} />
+          </TouchableOpacity>
+        </View>
+      )}
+
+      {matchDev && (
+        <View style={styles.matchContainer}>
+          <Image style={styles.matchImage} source={itsamatch} />
+          <Image style={styles.matchAvatar} source={{uri: matchDev.avatar}} />
+
+          <Text style={styles.matchName}>{matchDev.name}</Text>
+          <Text style={styles.matchBio}>{matchDev.bio}</Text>
+
+          <TouchableOpacity onPress={() => setMatchDev(null)}>
+            <Text style={styles.closeMatch}>FECHAR</Text>
           </TouchableOpacity>
         </View>
       )}
