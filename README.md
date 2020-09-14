@@ -26,9 +26,11 @@
 
 ### 💻 Project
 
-Aplicação Web, Android e iOS que simula um "Tinder" para desenvolvedores.
+A fullstack application that simulate a Tinder for developers.
 
-O projeto tem como objetivo final criar um clone do Tinder porém com a peculiaridade de ser um Tinder para Desenvolvedores(TindDev), em que o usuário logado utilizará sua conta do github e os usuários para Like ou Deslike também serão usuários do github.
+The project's main objective is to connect developers simulating Tinder's UI, where the logged user will use his github account to Like or Dislike other devs alson on github and will be notified in real time if a "match" happens.
+
+Project developped during Rocketseat's OmniStack Week 8.
 
 ## :rocket: Technologies
 
